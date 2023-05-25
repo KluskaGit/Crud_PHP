@@ -1,0 +1,18 @@
+.login_main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.log_heading {
+  position: absolute;
+  padding-bottom: 300px;
+  z-index: -1;
+}
+
+.index_bttns {
+  display: flex;
+  justify-content: space-between;
+}
