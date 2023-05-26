@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pl-PL">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD</title>
+    <title>Log in</title>
 
     <?php include 'includes/head.php'; ?>
 </head>
@@ -28,13 +28,11 @@
                         <label for="PasswordField" class="form-label">Password</label>
                         <input type="password" class="form-control" id="PasswordField" required>
                     </div>
-                    <div class="mb-3 index_bttns">
+                    <div class="mb-3 signin_bttn">
                         <input class="whitebttn" name="login" type="submit" value="Sign in">
-                        <form action="pages/register.php">
-                            <input class="whitebttn" name="register" type="submit" value="Register">
-                        </form>
                     </div>
                 </form>
+                <span>Don't have account? Register <a href="pages/register.php">here</span>
             </main>
 
         </div>
