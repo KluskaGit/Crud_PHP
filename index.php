@@ -20,11 +20,13 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $verify = mysqli_fetch_array(mysqli_query($connection, 'SELECT user_id, password FROM users WHERE (email like "' . $email . '" or login like "' . $email . '") and password like "' . $password . '" '));
+        $verify = mysqli_fetch_array(mysqli_query($connection, 'SELECT * FROM users WHERE email like "' . $email . '" or login like "' . $email . '"'));
         if ($verify != [] and password_verify($password, $verify['password'])) {
             session_start();
             $_SESSION['userID'] = $verify['user_id'];
+            header('Location: pages/crud.php');
         }
+        mysqli_close($connection);
     }
     ?>
 

@@ -34,4 +34,8 @@ body {
 .signin_bttn {
   display: flex;
   justify-content: center;
+}
+
+.th {
+  color: black;
 }/*# sourceMappingURL=style.css.map */
