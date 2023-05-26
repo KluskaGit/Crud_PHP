@@ -11,6 +11,23 @@
 </head>
 
 <body>
+
+    <?php
+    include 'includes/dbconnect.php';
+    $email = '';
+    $password = '';
+    if (isset($_POST['loginbttn'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $verify = mysqli_fetch_array(mysqli_query($connection, 'SELECT user_id, password FROM users WHERE (email like "' . $email . '" or login like "' . $email . '") and password like "' . $password . '" '));
+        if ($verify != [] and password_verify($password, $verify['password'])) {
+            session_start();
+            $_SESSION['userID'] = $verify['user_id'];
+        }
+    }
+    ?>
+
     <div class="container-fluid p-0">
         <div class="container">
 
@@ -19,18 +36,18 @@
                 <form method="post">
                     <div class="mb-3">
                         <label for="EmailOrLogin" class="form-label">Email/Login</label>
-                        <input type="email" class="form-control" id="EmailOrLogin" required>
+                        <input type="email" name='email' class="form-control" id="EmailOrLogin" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="PasswordField" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="PasswordField" required>
+                        <input type="password" name='password' class="form-control" id="PasswordField" required>
                     </div>
                     <div class="mb-3 signin_bttn">
-                        <input class="whitebttn" name="login" type="submit" value="Sign in">
+                        <input class="whitebttn" name="loginbttn" type="submit" value="Sign in">
                     </div>
                 </form>
-                <span>Don't have account? Register <a href="pages/register.php">here</span>
+                <span>Don't have account? Register <a href="pages/register.php">here</a></span>
             </main>
 
         </div>
