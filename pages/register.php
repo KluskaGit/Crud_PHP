@@ -54,7 +54,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="PasswordField" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="PasswordField" name='password' required value=<?php echo $password ?>>
+                        <input minlength="8" type="password" class="form-control" id="PasswordField" name='password' required value=<?php echo $password ?>>
                     </div>
                     <div class="mb-3">
                         <label for="RepeatPasswordField" class="form-label">Repeat password</label>
