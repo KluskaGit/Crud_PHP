@@ -16,10 +16,10 @@
     include 'includes/dbconnect.php';
     $email = '';
     $password = '';
+    $login_failed = False;
     if (isset($_POST['loginbttn'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $login_failed = False;
 
         $verify = mysqli_fetch_array(mysqli_query($connection, 'SELECT * FROM users WHERE email like "' . $email . '" or login like "' . $email . '"'));
         if ($verify != [] and password_verify($password, $verify['password'])) {

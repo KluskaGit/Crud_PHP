@@ -40,6 +40,24 @@ body {
   justify-content: center;
 }
 
-.th {
+th {
   color: black;
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+.emp_form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 70vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.employees_site {
+  overflow-x: auto;
 }/*# sourceMappingURL=style.css.map */
