@@ -49,7 +49,7 @@
                         <input type="email" class="form-control" id="Email" name="email" required value=<?php echo $email ?>>
                         <?php
                         if ($error_email) {
-                            echo '<span style="color: red">Account with this Email already exist.</span>';
+                            echo '<span class="errors">Account with this Email already exist.</span>';
                         }
                         ?>
                     </div>
@@ -62,7 +62,7 @@
                         <input type="password" class="form-control" id="RepeatPasswordField" name='rpassword' required value=<?php echo $rpassword ?>>
                         <?php
                         if ($error_password) {
-                            echo '<span style="color: red">The passwords are not the same.</span>';
+                            echo '<span class="errors">The passwords are not the same.</span>';
                         }
                         ?>
                     </div>
