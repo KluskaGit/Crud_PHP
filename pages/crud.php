@@ -11,6 +11,22 @@
 
 <body>
 
+    <?php
+    include '../includes/dbconnect.php';
+    $em_id = array();
+    if (isset($_POST['deletebttn'])) {
+        $em_id = $_POST['emid'];
+        if ($em_id != []) {
+            for ($i = 0; $i < count($em_id); $i++) {
+                mysqli_query($connection, 'DELETE FROM employees where em_id=' . $em_id[$i] . '');
+            }
+            header('Location: crud.php');
+        } else {
+            header('Location: crud.php');
+        }
+    }
+    ?>
+
     <div class="container-fluid p-0 employees_site">
         <?php include '../includes/header.php' ?>
         <div class="container">
@@ -27,18 +43,17 @@
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>City</th>
-                                <th>Date of Employment (RMD)</th>
+                                <th>Date of Employment (YMD)</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <?php
-                            include '../includes/dbconnect.php';
                             $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id');
 
                             while ($row = mysqli_fetch_array($all_employees)) {
                                 echo '<tr>' .
-                                    '<td><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td>' .
+                                    '<td><input name="emid[]" class="form-check-input" type="checkbox" value=' . $row['em_id'] . ' id="flexCheckDefault"></td>' .
                                     '<td>' . $row['em_id'] . '</td>' .
                                     '<td>' . $row['name'] . '</td>' .
                                     '<td>' . $row['surname'] . '</td>' .
@@ -53,6 +68,12 @@
 
                         </tbody>
                     </table>
+                    <div class="buttons_section">
+                        <section>
+                            <input class="redbttn" type="submit" name="deletebttn" value="Delete">
+                            <input class="yellowbttn" type="submit" name="editbttn" value="Edit">
+                        </section>
+                    </div>
                 </form>
             </main>
         </div>

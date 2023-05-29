@@ -12,13 +12,40 @@ body {
   color: black;
   padding: 4px 10px 4px 10px;
   border-radius: 10px;
+  background-color: white;
+  border: none;
 }
 
 .whitebttn:hover {
   background-color: rgb(224, 224, 224);
-  box-shadow: rgba(255, 251, 251, 0.5) 0px 0px 20px 0px;
+  box-shadow: rgba(224, 224, 224, 0.5) 0px 0px 20px 0px;
 }
 
 .errors {
   color: red;
+}
+
+.redbttn {
+  background-color: rgb(173, 2, 2);
+  padding: 4px 10px 4px 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+.redbttn:hover {
+  background-color: rgb(136, 0, 0);
+  box-shadow: rgba(255, 0, 0, 0.5) 0px 0px 20px 0px;
+}
+
+.yellowbttn {
+  background-color: rgb(231, 231, 0);
+  padding: 4px 10px 4px 10px;
+  border-radius: 10px;
+  border: none;
+  color: black;
+}
+
+.yellowbttn:hover {
+  background-color: rgb(216, 216, 0);
+  box-shadow: rgba(216, 216, 0, 0.5) 0px 0px 20px 0px;
 }
