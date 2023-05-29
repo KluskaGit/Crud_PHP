@@ -14,6 +14,7 @@
     <?php
     include '../includes/dbconnect.php';
     $em_id = array();
+    $edit_error = False;
     if (isset($_POST['deletebttn'])) {
         $em_id = $_POST['emid'];
         if ($em_id != []) {
@@ -21,6 +22,18 @@
                 mysqli_query($connection, 'DELETE FROM employees where em_id=' . $em_id[$i] . '');
             }
             header('Location: crud.php');
+        } else {
+            header('Location: crud.php');
+        }
+    } elseif (isset($_POST['editbttn'])) {
+        $em_id = $_POST['emid'];
+        if ($em_id != []) {
+            if (count($em_id) == 1) {
+                $edit_error = False;
+                header('Location: edit.php?emid=' . $em_id[0] . '');
+            } else {
+                $edit_error = True;
+            }
         } else {
             header('Location: crud.php');
         }
@@ -69,10 +82,15 @@
                         </tbody>
                     </table>
                     <div class="buttons_section">
-                        <section>
+                        <section class="deleteandedit">
                             <input class="redbttn" type="submit" name="deletebttn" value="Delete">
                             <input class="yellowbttn" type="submit" name="editbttn" value="Edit">
                         </section>
+                        <?php
+                        if ($edit_error) {
+                            echo '<span class="errors" style="text-align: right">You can select only one employee to edit.</span>';
+                        }
+                        ?>
                     </div>
                 </form>
             </main>

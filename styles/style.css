@@ -50,6 +50,10 @@ body {
   box-shadow: rgba(216, 216, 0, 0.5) 0px 0px 20px 0px;
 }
 
+option {
+  color: black;
+}
+
 .login_main {
   display: flex;
   justify-content: center;
@@ -90,7 +94,14 @@ td {
 }
 
 .buttons_section {
-  width: 70vw;
   display: flex;
   justify-content: right;
+  flex-direction: column;
+  width: 70vw;
+}
+
+.deleteandedit {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
 }/*# sourceMappingURL=style.css.map */

@@ -21,7 +21,13 @@ td {
 }
 
 .buttons_section {
-  width: 70vw;
   display: flex;
   justify-content: right;
+  flex-direction: column;
+  width: 70vw;
+}
+.deleteandedit {
+  display: flex;
+  justify-content: right;
+  gap: 10px;
 }
