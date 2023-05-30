@@ -13,6 +13,12 @@
 
     <?php
     include '../includes/dbconnect.php';
+    session_start();
+    if (!isset($_SESSION['userID'])) {
+        header('Location: index.php');
+    }
+
+    $user_name = mysqli_fetch_array(mysqli_query($connection, 'SELECT login From users where user_id=' . $_SESSION['userID'] . ''));
 
     $em_id = array();
     $edit_error = False;
