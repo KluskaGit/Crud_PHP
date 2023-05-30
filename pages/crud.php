@@ -13,8 +13,10 @@
 
     <?php
     include '../includes/dbconnect.php';
+
     $em_id = array();
     $edit_error = False;
+
     if (isset($_POST['deletebttn'])) {
         $em_id = $_POST['emid'];
         if ($em_id != []) {
@@ -62,7 +64,14 @@
                         <tbody>
 
                             <?php
-                            $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id');
+                            if ($SearchField == '') {
+                                $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id');
+                            } else {
+                                $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id 
+                                WHERE name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
+                                or email_address like "%' . $SearchField . '%" or city like "%' . $SearchField . '%" or date_of_employment like "%' . $SearchField . '%"');
+                            }
+
 
                             while ($row = mysqli_fetch_array($all_employees)) {
                                 echo '<tr>' .
