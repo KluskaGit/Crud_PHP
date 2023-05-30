@@ -38,5 +38,4 @@ ADD CONSTRAINT FOREIGN KEY (position) REFERENCES positions (pos_id);
 INSERT INTO positions(position_name) VALUES ('Intern'),('Boss');
 
 INSERT INTO employees(name, surname, position, phone_number, email_address, city)
-values ('Kamil', 'Kluska', 1, 222444333, '123email@gmail.com', 'Siedlce'),
-('Mateusz', 'Kowal', 2, 121341445, '512email@gmail.com', 'Warszawa');
+values ('Mateusz', 'Kowal', 2, 121341445, '512email@gmail.com', 'Warszawa');
