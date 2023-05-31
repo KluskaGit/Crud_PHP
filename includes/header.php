@@ -19,7 +19,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color: white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $user_name['login'] ?></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item " href="#">Log out</a></li>
+                        <li><a class="dropdown-item " href="logout.php">Log out</a></li>
                     </ul>
                 </li>
             </ul>
