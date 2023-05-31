@@ -15,13 +15,15 @@
     include '../includes/dbconnect.php';
     session_start();
     if (!isset($_SESSION['userID'])) {
-        header('Location: index.php');
+        header('Location: ../index.php');
     }
 
     $user_name = mysqli_fetch_array(mysqli_query($connection, 'SELECT login From users where user_id=' . $_SESSION['userID'] . ''));
 
     $em_id = array();
     $edit_error = False;
+    $new_login = '';
+    $empty_login = False;
 
     if (isset($_POST['deletebttn'])) {
         $em_id = $_POST['emid'];
@@ -45,13 +47,49 @@
         } else {
             header('Location: crud.php');
         }
+    } elseif (isset($_POST['ChangeLogin'])) {
+        $new_login = $_POST['new_login'];
+        if ($new_login != '') {
+            mysqli_query($connection, 'UPDATE users set login="' . $new_login . '" where user_id=' . $_SESSION['userID'] . '');
+            header('Location: crud.php');
+        } else {
+            $empty_login = True;
+        }
     }
     ?>
 
     <div class="container-fluid p-0 employees_site">
         <?php include '../includes/header.php' ?>
         <div class="container">
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content change_login_modal">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Change your login</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">New login:</label>
+                                    <input type="text" name="new_login" class="form-control" id="recipient-name">
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-light" name="ChangeLogin" value="Save">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <main class="login_main">
+
                 <form method="post" class="emp_form">
                     <table class="table">
                         <thead class="table-light ">

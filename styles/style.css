@@ -117,6 +117,10 @@ td {
   gap: 10px;
 }
 
+.change_login_modal {
+  background-color: #191919;
+}
+
 .navbar {
   position: absolute;
   width: 100vw;
