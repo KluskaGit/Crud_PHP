@@ -23,7 +23,8 @@
     $em_id = array();
     $edit_error = False;
     $new_login = '';
-    $empty_login = False;
+    $empty_field = False;
+    $new_pos = '';
 
     if (isset($_POST['deletebttn'])) {
         $em_id = $_POST['emid'];
@@ -52,8 +53,11 @@
         if ($new_login != '') {
             mysqli_query($connection, 'UPDATE users set login="' . $new_login . '" where user_id=' . $_SESSION['userID'] . '');
             header('Location: crud.php');
-        } else {
-            $empty_login = True;
+        }
+    } elseif (isset($_POST['add_pos'])) {
+        $new_pos = $_POST['new_pos'];
+        if ($new_pos != '') {
+            mysqli_query($connection, 'INSERT INTO positions (position_name, user_pos) value ("' . $new_pos . '", ' . $_SESSION['userID'] . ')');
         }
     }
     ?>
@@ -62,7 +66,10 @@
         <?php include '../includes/header.php' ?>
         <div class="container">
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+            <!-- Change login modal-->
+            <div class="modal fade" id="chng_login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-sm">
                     <div class="modal-content change_login_modal">
                         <div class="modal-header">
@@ -74,7 +81,7 @@
 
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">New login:</label>
-                                    <input type="text" name="new_login" class="form-control" id="recipient-name">
+                                    <input type="text" minlength="2" name="new_login" class="form-control" id="recipient-name">
 
                                 </div>
 
@@ -82,6 +89,32 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-light" name="ChangeLogin" value="Save">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Add postion modal-->
+            <div class="modal fade" id="pos_modal" tabindex="-1" aria-labelledby="pos_modal1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content change_login_modal">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="pos_modal1">Add new position</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">New position:</label>
+                                    <input type="text" minlength="2" name="new_pos" class="form-control" id="recipient-name">
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-light" name="add_pos" value="Save">
                             </div>
                         </form>
                     </div>
@@ -108,13 +141,11 @@
                         <tbody>
 
                             <?php
-                            if ($SearchField == '') {
-                                $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id');
-                            } else {
-                                $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id 
-                                WHERE name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
-                                or email_address like "%' . $SearchField . '%" or city like "%' . $SearchField . '%" or date_of_employment like "%' . $SearchField . '%"');
-                            }
+
+                            $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id 
+                                WHERE (name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
+                                or email_address like "%' . $SearchField . '%" or city like "%' . $SearchField . '%" or date_of_employment like "%' . $SearchField . '%") and user_em=' . $_SESSION['userID'] . '');
+
 
 
                             while ($row = mysqli_fetch_array($all_employees)) {
