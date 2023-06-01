@@ -41,7 +41,3 @@ ALTER TABLE employees
 ADD CONSTRAINT FOREIGN KEY (user_em) REFERENCES users (user_id);
 
 
-/*INSERT INTO positions(position_name) VALUES ('Boss'),('Intern');
-
-INSERT INTO employees(name, surname, position, phone_number, email_address, city)
-values ('Kamil', 'Kowal', 1, 121341445, '512email@gmail.com', 'Warszawa');*/

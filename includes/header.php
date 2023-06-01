@@ -24,7 +24,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#pos_modal">Add</a></li>
 
-                        <li><a class=" dropdown-item " href=" #">Delete</a></li>
+                        <li><a class=" dropdown-item " href="#" data-bs-toggle="modal" data-bs-target="#delete_pos">Delete</a></li>
                     </ul>
                 </li>
 

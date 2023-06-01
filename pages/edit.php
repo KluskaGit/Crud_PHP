@@ -59,7 +59,7 @@
                         <label for="Position" class="form-label">Position</label>
                         <select name="position" class="form-select" id='Position' aria-label="Default select example">
                             <?php
-                            $positions_list = mysqli_query($connection, 'SELECT * From positions where pos_id!=' . $em_data['position'] . '');
+                            $positions_list = mysqli_query($connection, 'SELECT * From positions where pos_id!=' . $em_data['position'] . ' and user_pos=' . $_SESSION['userID'] . '');
                             echo '<option selected value=' . $em_data['position'] . '>' . $em_data['position_name'] . '';
                             while ($row = mysqli_fetch_array($positions_list)) {
                                 echo '<option value=' . $row['pos_id'] . '>' . $row['position_name'] . '</option>';

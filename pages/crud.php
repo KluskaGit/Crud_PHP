@@ -25,6 +25,7 @@
     $new_login = '';
     $empty_table = False;
     $new_pos = '';
+    $del_pos = array();
 
     if (isset($_POST['deletebttn'])) {
         $em_id = $_POST['emid'];
@@ -58,6 +59,17 @@
         $new_pos = $_POST['new_pos'];
         if ($new_pos != '') {
             mysqli_query($connection, 'INSERT INTO positions (position_name, user_pos) value ("' . $new_pos . '", ' . $_SESSION['userID'] . ')');
+            header('Location: crud.php');
+        }
+    } elseif (isset($_POST['del_pos'])) {
+        $del_pos = $_POST['pos'];
+        if ($del_pos != []) {
+            for ($k = 0; $k < count($del_pos); $k++) {
+                mysqli_query($connection, 'DELETE FROM positions where pos_id=' . $del_pos[$k] . '');
+            }
+            header('Location: crud.php');
+        } else {
+            header('Location: crud.php');
         }
     }
     ?>
@@ -68,9 +80,10 @@
         WHERE (name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
         or email_address like "%' . $SearchField . '%" or city like "%' . $SearchField . '%" or date_of_employment like "%' . $SearchField . '%") and user_em=' . $_SESSION['userID'] . ' ORDER BY em_id');
 
+        $emp = mysqli_query($connection, 'SELECT * FROM employees where user_em=' . $_SESSION['userID'] . '');
         $all_pos = mysqli_query($connection, 'SELECT * FROM positions where user_pos=' . $_SESSION['userID'] . '');
 
-        if (mysqli_fetch_array($all_employees) == []) {
+        if (mysqli_fetch_array($emp) == []) {
             $empty_table = True;
         }
 
@@ -141,6 +154,42 @@
                     </div>
                 </div>
             </div>
+            <!-- Delete postion modal-->
+            <div class="modal fade" id="delete_pos" tabindex="-1" aria-labelledby="pos_modal1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content change_login_modal">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="pos_modal1">Delete positions</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post" style="overflow:auto">
+                            <div class="modal-body">
+
+                                <div class="mb-3">
+                                    <ul class="list-group">
+                                        <label for="recipient-name" class="col-form-label">Chose positions:</label>
+                                        <?php
+                                        while ($pos = mysqli_fetch_array($all_pos)) {
+                                            echo '
+                                            <li class="list-group-item" style="background-color: #191919">' .
+                                                '<input name="pos[]" class="form-check-input me-1"  type="checkbox" value=' . $pos['pos_id'] . ' id="firstCheckbox">' .
+                                                '<label class="form-check-label" for="firstCheckbox">' . $pos['position_name'] . '</label>' .
+                                                '</li>';
+                                        }
+                                        ?>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-light" name="del_pos" value="Delete">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <main class="login_main">
                 <?php
@@ -176,7 +225,7 @@
 
                             while ($row = mysqli_fetch_array($all_employees)) {
                                 echo '<tr>' .
-                                    '<td><input name="emid[]" class="form-check-input" type="checkbox" value=' . $row['em_id'] . ' id="flexCheckDefault"></td>' .
+                                    '<td><input name="emid[]" class="form-check-input" type="checkbox" value=' . $row['em_id'] . ' id="empcheck"></td>' .
                                     '<td>' . $row['em_id'] . '</td>' .
                                     '<td>' . $row['name'] . '</td>' .
                                     '<td>' . $row['surname'] . '</td>' .
