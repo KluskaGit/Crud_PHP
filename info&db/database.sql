@@ -12,7 +12,8 @@ CREATE TABLE employees
     phone_number int(9),
     email_address varchar(255),
     city varchar(255),
-    date_of_employment DATE DEFAULT NOW()
+    date_of_employment DATE DEFAULT NOW(),
+    user_em int(11) NOT NULL
     
 );
 
@@ -20,7 +21,8 @@ DROP TABLE IF EXISTS positions;
 CREATE TABLE positions
 (
     pos_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    position_name varchar(255) NOT NULL
+    position_name varchar(255) NOT NULL,
+    user_pos int(11) NOT NULL
 );
 
 DROP TABLE IF EXISTS users;
@@ -35,7 +37,11 @@ CREATE TABLE users
 ALTER TABLE employees
 ADD CONSTRAINT FOREIGN KEY (position) REFERENCES positions (pos_id);
 
-INSERT INTO positions(position_name) VALUES ('Intern'),('Boss');
+ALTER TABLE employees
+ADD CONSTRAINT FOREIGN KEY (user_em) REFERENCES users (user_id);
+
+
+/*INSERT INTO positions(position_name) VALUES ('Boss'),('Intern');
 
 INSERT INTO employees(name, surname, position, phone_number, email_address, city)
-values ('Mateusz', 'Kowal', 2, 121341445, '512email@gmail.com', 'Warszawa');
+values ('Kamil', 'Kowal', 1, 121341445, '512email@gmail.com', 'Warszawa');*/
