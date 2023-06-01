@@ -23,7 +23,7 @@
     $em_id = array();
     $edit_error = False;
     $new_login = '';
-    $empty_field = False;
+    $empty_table = False;
     $new_pos = '';
 
     if (isset($_POST['deletebttn'])) {
@@ -63,7 +63,28 @@
     ?>
 
     <div class="container-fluid p-0 employees_site">
-        <?php include '../includes/header.php' ?>
+        <?php include '../includes/header.php';
+        $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id 
+        WHERE (name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
+        or email_address like "%' . $SearchField . '%" or city like "%' . $SearchField . '%" or date_of_employment like "%' . $SearchField . '%") and user_em=' . $_SESSION['userID'] . ' ORDER BY em_id');
+
+        $all_pos = mysqli_query($connection, 'SELECT * FROM positions where user_pos=' . $_SESSION['userID'] . '');
+
+        if (mysqli_fetch_array($all_employees) == []) {
+            $empty_table = True;
+        }
+
+        if (mysqli_fetch_array($all_pos) == []) {
+            echo '<style>
+                .addemployee{
+                    display: none;
+                }
+            </style>';
+        }
+
+
+
+        ?>
         <div class="container">
 
 
@@ -122,8 +143,15 @@
             </div>
 
             <main class="login_main">
+                <?php
+                if ($empty_table) {
+                    echo '<h3>You have to add positions and next add a employee</h3>';
+                } ?>
 
-                <form method="post" class="emp_form">
+                <form method="post" <?php
+                                    if ($empty_table) {
+                                        echo 'style="display: none"';
+                                    } ?> class="emp_form">
                     <table class="table">
                         <thead class="table-light ">
                             <tr>
@@ -142,9 +170,7 @@
 
                             <?php
 
-                            $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id 
-                                WHERE (name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
-                                or email_address like "%' . $SearchField . '%" or city like "%' . $SearchField . '%" or date_of_employment like "%' . $SearchField . '%") and user_em=' . $_SESSION['userID'] . '');
+
 
 
 

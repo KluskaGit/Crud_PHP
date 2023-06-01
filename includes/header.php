@@ -7,6 +7,7 @@
     }
 
 
+
     ?>
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
@@ -21,7 +22,7 @@
                     <a class="nav-link" data-bs-toggle="modal" data-bs-target="#pos_modal" style="color: white" href="#">Add position</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white" href="../pages/add_em.php">Add employee</a>
+                    <a class="addemployee nav-link" style="color: white" href="../pages/add_em.php">Add employee</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color: white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $user_name['login'] ?></a>
