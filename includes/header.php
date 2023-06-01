@@ -18,12 +18,20 @@
 
 
             <ul class="nav nav-pills user_drop">
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#pos_modal" style="color: white" href="#">Add position</a>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" style="color: white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Position</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#pos_modal">Add</a></li>
+
+                        <li><a class=" dropdown-item " href=" #">Delete</a></li>
+                    </ul>
                 </li>
+
                 <li class="nav-item">
                     <a class="addemployee nav-link" style="color: white" href="../pages/add_em.php">Add employee</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" style="color: white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><?php echo $user_name['login'] ?></a>
                     <ul class="dropdown-menu">
@@ -34,6 +42,7 @@
                         <li><a class="dropdown-item " href="logout.php">Log out</a></li>
                     </ul>
                 </li>
+
             </ul>
         </div>
     </nav>
