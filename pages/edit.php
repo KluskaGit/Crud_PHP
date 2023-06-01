@@ -12,6 +12,10 @@
 <body>
     <?php
     include '../includes/dbconnect.php';
+    session_start();
+    if (!isset($_SESSION['userID'])) {
+        header('Location: ../index.php');
+    }
     $emid = $_GET['emid'];
 
     $em_data = mysqli_fetch_array(mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id where em_id=' . $emid . ''));

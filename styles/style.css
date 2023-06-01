@@ -54,6 +54,17 @@ option {
   color: black;
 }
 
+.searchbttn {
+  border: solid white;
+  border-radius: 10px;
+  background-color: rgb(12, 11, 11);
+}
+
+.searchbttn:hover {
+  background-color: white;
+  color: black;
+}
+
 .login_main {
   display: flex;
   justify-content: center;
@@ -104,4 +115,19 @@ td {
   display: flex;
   justify-content: right;
   gap: 10px;
+}
+
+.change_login_modal {
+  background-color: #191919;
+}
+
+.navbar {
+  position: absolute;
+  width: 100vw;
+  background-color: rgb(12, 11, 11) !important;
+  padding: 30px;
+}
+
+.user_drop {
+  margin-right: 100px;
 }/*# sourceMappingURL=style.css.map */

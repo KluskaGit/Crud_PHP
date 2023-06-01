@@ -53,3 +53,13 @@ body {
 option {
   color: black;
 }
+
+.searchbttn {
+  border: solid white;
+  border-radius: 10px;
+  background-color: rgb(12, 11, 11);
+}
+.searchbttn:hover {
+  background-color: white;
+  color: black;
+}
