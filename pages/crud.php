@@ -82,12 +82,13 @@
 
         $emp = mysqli_query($connection, 'SELECT * FROM employees where user_em=' . $_SESSION['userID'] . '');
         $all_pos = mysqli_query($connection, 'SELECT * FROM positions where user_pos=' . $_SESSION['userID'] . '');
+        $empty_pos = mysqli_query($connection, 'SELECT * FROM positions where user_pos=' . $_SESSION['userID'] . '');
 
         if (mysqli_fetch_array($emp) == []) {
             $empty_table = True;
         }
 
-        if (mysqli_fetch_array($all_pos) == []) {
+        if (mysqli_fetch_array($empty_pos) == []) {
             echo '<style>
                 .addemployee{
                     display: none;
@@ -96,7 +97,7 @@
         }
 
 
-
+        mysqli_close($connection);
         ?>
         <div class="container">
 
@@ -169,7 +170,7 @@
                                     <ul class="list-group">
                                         <label for="recipient-name" class="col-form-label">Chose positions:</label>
                                         <?php
-                                        while ($pos = mysqli_fetch_array($all_pos)) {
+                                        while ($pos = @mysqli_fetch_array($all_pos)) {
                                             echo '
                                             <li class="list-group-item" style="background-color: #191919">' .
                                                 '<input name="pos[]" class="form-check-input me-1"  type="checkbox" value=' . $pos['pos_id'] . ' id="firstCheckbox">' .

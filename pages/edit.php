@@ -40,6 +40,7 @@
         phone_number=' . $phone . ', email_address="' . $email . '", city="' . $city . '", date_of_employment="' . $date_em . '" where em_id=' . $emid . '');
         header('Location: crud.php');
     }
+    mysqli_close($connection);
     ?>
     <div class="container-fluid p-0">
         <div class="container">

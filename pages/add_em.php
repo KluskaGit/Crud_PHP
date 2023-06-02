@@ -37,6 +37,7 @@
         value("' . $name . '", "' . $surname . '", ' . $position . ', ' . $phone . ', "' . $email . '", "' . $city . '", "' . $date_em . '", ' . $_SESSION['userID'] . ')');
         header('Location: crud.php');
     }
+    mysqli_close($connection);
     ?>
     <div class="container-fluid p-0">
         <div class="container">

@@ -34,8 +34,8 @@
             $password = password_hash($password, PASSWORD_ARGON2I);
             mysqli_query($connection, "INSERT INTO users (email,login ,password) values ('$email',  '$email', '$password')");
             header('Location: ../index.php');
-            mysqli_close($connection);
         }
+        mysqli_close($connection);
     }
     ?>
     <div class="container-fluid p-0">
