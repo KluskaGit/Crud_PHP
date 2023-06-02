@@ -170,7 +170,7 @@
                                     <ul class="list-group">
                                         <label for="recipient-name" class="col-form-label">Chose positions:</label>
                                         <?php
-                                        while ($pos = @mysqli_fetch_array($all_pos)) {
+                                        while ($pos = mysqli_fetch_array($all_pos)) {
                                             echo '
                                             <li class="list-group-item" style="background-color: #191919">' .
                                                 '<input name="pos[]" class="form-check-input me-1"  type="checkbox" value=' . $pos['pos_id'] . ' id="firstCheckbox">' .

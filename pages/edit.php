@@ -40,7 +40,7 @@
         phone_number=' . $phone . ', email_address="' . $email . '", city="' . $city . '", date_of_employment="' . $date_em . '" where em_id=' . $emid . '');
         header('Location: crud.php');
     }
-    mysqli_close($connection);
+
     ?>
     <div class="container-fluid p-0">
         <div class="container">
@@ -65,6 +65,7 @@
                             while ($row = mysqli_fetch_array($positions_list)) {
                                 echo '<option value=' . $row['pos_id'] . '>' . $row['position_name'] . '</option>';
                             }
+                            mysqli_close($connection);
                             ?>
 
                         </select>

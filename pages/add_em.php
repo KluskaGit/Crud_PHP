@@ -37,7 +37,7 @@
         value("' . $name . '", "' . $surname . '", ' . $position . ', ' . $phone . ', "' . $email . '", "' . $city . '", "' . $date_em . '", ' . $_SESSION['userID'] . ')');
         header('Location: crud.php');
     }
-    mysqli_close($connection);
+
     ?>
     <div class="container-fluid p-0">
         <div class="container">
@@ -61,6 +61,7 @@
                             while ($row = mysqli_fetch_array($positions_list)) {
                                 echo '<option value=' . $row['pos_id'] . '>' . $row['position_name'] . '</option>';
                             }
+                            mysqli_close($connection);
                             ?>
 
                         </select>
