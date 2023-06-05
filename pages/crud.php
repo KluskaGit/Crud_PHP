@@ -76,8 +76,9 @@
 
     <div class="container-fluid p-0 employees_site">
         <?php include '../includes/header.php';
+
         $all_employees = mysqli_query($connection, 'SELECT * FROM employees inner join positions ON employees.position=positions.pos_id 
-        WHERE (name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
+        WHERE (em_id like "' . $SearchField . '" or name like "%' . $SearchField . '%" or surname like "%' . $SearchField . '%" or position_name like "%' . $SearchField . '%" or phone_number like "%' . $SearchField . '%" 
         or email_address like "%' . $SearchField . '%" or city like "%' . $SearchField . '%" or date_of_employment like "%' . $SearchField . '%") and user_em=' . $_SESSION['userID'] . ' ORDER BY em_id');
 
         $emp = mysqli_query($connection, 'SELECT * FROM employees where user_em=' . $_SESSION['userID'] . '');
