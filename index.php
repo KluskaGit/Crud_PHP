@@ -41,7 +41,7 @@
                 <form method="post">
                     <div class="mb-3">
                         <label for="EmailOrLogin" class="form-label">Email/Login</label>
-                        <input type="email" name='email' class="form-control" id="EmailOrLogin" required value=<?php echo $email ?>>
+                        <input type="text" name='email' class="form-control" id="EmailOrLogin" required value=<?php echo $email ?>>
                     </div>
 
                     <div class="mb-3">
