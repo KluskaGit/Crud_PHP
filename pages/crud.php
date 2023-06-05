@@ -27,6 +27,8 @@
     $new_pos = '';
     $del_pos = array();
 
+
+
     if (isset($_POST['deletebttn'])) {
         $em_id = $_POST['emid'];
         if ($em_id != []) {
@@ -64,8 +66,12 @@
     } elseif (isset($_POST['del_pos'])) {
         $del_pos = $_POST['pos'];
         if ($del_pos != []) {
+
             for ($k = 0; $k < count($del_pos); $k++) {
-                mysqli_query($connection, 'DELETE FROM positions where pos_id=' . $del_pos[$k] . '');
+                $DelPosCheck = mysqli_query($connection, 'SELECT * FROM employees where position =' . $del_pos[$k] . '');
+                if (mysqli_fetch_array($DelPosCheck) == []) {
+                    mysqli_query($connection, 'DELETE FROM positions where pos_id=' . $del_pos[$k] . '');
+                }
             }
             header('Location: crud.php');
         } else {
@@ -84,6 +90,7 @@
         $emp = mysqli_query($connection, 'SELECT * FROM employees where user_em=' . $_SESSION['userID'] . '');
         $all_pos = mysqli_query($connection, 'SELECT * FROM positions where user_pos=' . $_SESSION['userID'] . '');
         $empty_pos = mysqli_query($connection, 'SELECT * FROM positions where user_pos=' . $_SESSION['userID'] . '');
+
 
         if (mysqli_fetch_array($emp) == []) {
             $empty_table = True;
@@ -185,6 +192,7 @@
 
                             </div>
                             <div class="modal-footer">
+                                (You cannot delete a position if the employee has it).
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-light" name="del_pos" value="Delete">
                             </div>
