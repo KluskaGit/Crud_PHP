@@ -72,7 +72,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="Phone" class="form-label">Phone number</label>
-                        <input type="number" name='phone' class="form-control" id="Phone" required value=<?php echo $em_data['phone_number'] ?>>
+                        <input type="tel" pattern="[0-9]{9}" name='phone' class="form-control" id="Phone" required value=<?php echo $em_data['phone_number'] ?>>
                     </div>
                     <div class="mb-3">
                         <label for="Email" class="form-label">Email</label>

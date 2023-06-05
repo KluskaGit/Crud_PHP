@@ -54,8 +54,17 @@
                         ?>
                     </div>
                     <div class="mb-3">
-                        <label for="PasswordField" class="form-label">Password</label>
-                        <input minlength="8" type="password" class="form-control" id="PasswordField" name='password' required value=<?php echo $password ?>>
+                        <label for="PasswordField" class="form-label">Password <span data-bs-toggle="collapse" data-bs-target="#InfoPattern" aria-expanded="false" aria-controls="collapseExample"><a style="text-decoration: none;" href="#">ⓘ</a></span></label>
+                        <div class="collapse" id="InfoPattern">
+                            <ul>
+                                <li>1 lowercase</li>
+                                <li>1 uppercase</li>
+                                <li>1 numeric value</li>
+                                <li>1 special symbol</li>
+                                <li>length 8-16</li>
+                            </ul>
+                        </div>
+                        <input pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-,<.>/?{}]).{8,16}" type="password" class="form-control" id="PasswordField" name='password' required value=<?php echo $password ?>>
                     </div>
                     <div class="mb-3">
                         <label for="RepeatPasswordField" class="form-label">Repeat password</label>
@@ -70,7 +79,6 @@
                         <input class="whitebttn" name="registerbtn" type="submit" value="Register">
                     </div>
                 </form>
-
             </div>
         </main>
     </div>

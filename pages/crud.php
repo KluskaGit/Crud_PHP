@@ -150,7 +150,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-light" name="add_pos" value="Save">
+                                <input type="submit" class="btn btn-light" name="add_pos" value="Add">
                             </div>
                         </form>
                     </div>
